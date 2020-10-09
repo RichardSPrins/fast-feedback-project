@@ -15,9 +15,9 @@ export default function Home() {
         <h1 className={styles.title}>
           Fast Feedback
         </h1>
-        <div>{auth?.user?.email}</div>
-        {!auth?.user && <button onClick={e => auth.signinWithGithub()}>Sign In</button>}
-        
+        <pre style={{width: '200px'}}>{JSON.stringify(auth?.user, null, 4)}</pre>
+        {!auth?.user && <button onClick={e => auth.signinWithGitHub()}>Sign In</button>}
+
         {auth?.user && <button onClick={e => auth.signout()}>Sign out</button>}
 
       </main>
