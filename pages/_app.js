@@ -1,19 +1,48 @@
 import { useEffect } from 'react'
-import { AuthProvider } from '../lib/auth'
-import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-import theme from '../styles/theme'
+import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
+import { Global, css } from '@emotion/core';
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }) {
+import { AuthProvider } from '@/lib/auth'
+import theme from '@/styles/theme'
 
-  useEffect(()=> {
+const GlobalStyle = ({ children }) => {
+  return (
+    <>
+      <Head>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+      </Head>
+      <CSSReset />
+      <Global
+        styles={css`
+          html {
+            scroll-behavior: smooth;
+          }
+          #__next {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+          }
+        `}
+      />
+      {children}
+    </>
+  );
+};
+
+const MyApp = ({ Component, pageProps }) => {
+
+  useEffect(() => {
     console.log(theme)
   }, [])
   return (
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <CSSReset />
-        <Component {...pageProps} />
-      </AuthProvider>
+      <ColorModeProvider>
+        <AuthProvider>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </AuthProvider>
+      </ColorModeProvider>
     </ThemeProvider>
   )
 }
