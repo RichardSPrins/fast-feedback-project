@@ -1,11 +1,20 @@
+import { useEffect } from 'react'
 import { AuthProvider } from '../lib/auth'
-import '../styles/globals.css'
+import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+import theme from '../styles/theme'
 
 function MyApp({ Component, pageProps }) {
+
+  useEffect(()=> {
+    console.log(theme)
+  }, [])
   return (
-    <AuthProvider>
-      <Component {...pageProps} />
-    </AuthProvider>
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <CSSReset />
+        <Component {...pageProps} />
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
 
