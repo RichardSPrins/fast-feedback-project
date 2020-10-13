@@ -26,28 +26,40 @@ const AddSiteModal = ({ children }) => {
   const { handleSubmit, register } = useForm();
 
   const onCreateSite = ({ name, url }) => {
-    const newSite = {
-      authorId: auth.user.uid,
-      createdAt: new Date().toISOString(),
-      name,
-      url,
-      settings: {
-        icons: true,
-        timestamp: true,
-        ratings: false
-      }
-    };
-
-    createSite(newSite);
-    toast({
-      position: 'top-right',
-      title: 'Success!',
-      description: "We've added your site.",
-      status: 'success',
-      duration: 2000,
-      isClosable: true
-    });
-    onClose();
+    try {
+      const newSite = {
+        authorId: auth.user.uid,
+        createdAt: new Date().toISOString(),
+        name,
+        url,
+        settings: {
+          icons: true,
+          timestamp: true,
+          ratings: false
+        }
+      };
+  
+      createSite(newSite);
+      toast({
+        position: 'top-right',
+        title: 'Success!',
+        description: "We've added your site.",
+        status: 'success',
+        duration: 2000,
+        isClosable: true
+      });
+      onClose();
+    } catch (error) {
+      toast({
+        position: 'top-right',
+        title: 'Uh Oh!',
+        description: "Something went wrong...",
+        status: 'error',
+        duration: 2000,
+        isClosable: true
+      })
+      onClose();
+    }
   };
 
   return (
