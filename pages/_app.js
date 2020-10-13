@@ -31,10 +31,6 @@ const GlobalStyle = ({ children }) => {
 };
 
 const MyApp = ({ Component, pageProps }) => {
-
-  useEffect(() => {
-    console.log(theme)
-  }, [])
   return (
     <ThemeProvider theme={theme}>
       <ColorModeProvider>
@@ -46,5 +42,7 @@ const MyApp = ({ Component, pageProps }) => {
     </ThemeProvider>
   )
 }
+
+
 
 export default MyApp

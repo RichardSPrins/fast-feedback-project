@@ -26,7 +26,7 @@ const theme = {
     github: {
       path: (
         <g
-          fill="none"
+          fill="currentColor"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
