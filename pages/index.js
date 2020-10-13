@@ -7,7 +7,7 @@ import { useAuth } from '@/lib/auth'
 import FreePlan from '@/components/Dashboard/FreePlan/FreePlan';
 
 export default function Home() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const { colorMode, toggleColorMode } = useColorMode();
   const auth = useAuth()
   useEffect(() => {
     console.log(auth)
@@ -22,7 +22,7 @@ export default function Home() {
 
 
       <Icon name="logo" size="64px" />
-      <Button onClick={toggleColorMode}>Toggle {colorMode === "light" ? "Dark" : "Light"}</Button>
+      {/* <Button onClick={toggleColorMode}>Toggle {colorMode === "light" ? "Dark" : "Light"}</Button> */}
       {!auth?.user && <Button size="sm" mt={4} onClick={e => auth.signinWithGitHub()}><Icon  name="github" /> {' '} Continue with GitHub</Button>}
 
       {auth?.user && <Button size="sm" mt={4} onClick={e => auth.signout()}>Sign out</Button>}
