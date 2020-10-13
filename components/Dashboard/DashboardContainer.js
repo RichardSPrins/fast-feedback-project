@@ -15,7 +15,9 @@ import { useAuth } from '@/lib/auth'
 
 const DashboardContainer = ({ children }) => {
   const auth = useAuth()
-
+  useEffect(() => {
+    console.log(auth?.user)
+  }, [])
   return (
     <Flex flexDirection="column">
       <Flex
@@ -31,7 +33,7 @@ const DashboardContainer = ({ children }) => {
         </Stack>
         <Flex alignItems="center">
           <Link mr={4}>Account</Link>
-          <Avatar size="sm" src={auth?.user?.photoUrl} />
+          <Avatar size="sm" src={auth?.user?.photoUrl || auth?.user?.photoURL} />
         </Flex>
       </Flex>
       <Flex
