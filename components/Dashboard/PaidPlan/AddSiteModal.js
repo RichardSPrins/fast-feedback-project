@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { mutate } from 'swr';
+import useSWR, { mutate } from 'swr';
 import {
   Modal,
   ModalOverlay,
@@ -18,8 +18,11 @@ import {
 
 import { createSite } from '@/lib/firestoreDb';
 import { useAuth } from '@/lib/auth';
+import fetcher from 'utils/fetcher';
 
 const AddSiteModal = ({ children }) => {
+  const { data, error } = useSWR('/api/sites', fetcher)
+
   const toast = useToast();
   const auth = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,7 +41,7 @@ const AddSiteModal = ({ children }) => {
           ratings: false
         }
       };
-  
+      
       createSite(newSite);
       toast({
         position: 'top-right',
@@ -48,6 +51,12 @@ const AddSiteModal = ({ children }) => {
         duration: 2000,
         isClosable: true
       });
+      mutate('/api/sites',
+        async (data) => {
+          return {sites: [ newSite,...data.sites]}
+        },
+        false
+      );
       onClose();
     } catch (error) {
       toast({
@@ -76,7 +85,7 @@ const AddSiteModal = ({ children }) => {
           transform: 'scale(0.95)'
         }}
       >
-        Add your first site.
+        {children}
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

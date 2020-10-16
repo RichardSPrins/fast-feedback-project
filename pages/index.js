@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Button, Heading, Text, useColorMode, Icon, Code, Flex } from "@chakra-ui/core";
 import Head from 'next/head'
+import { Link } from 'next/link'
 
 
 import { useAuth } from '@/lib/auth'

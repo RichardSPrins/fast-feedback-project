@@ -6,14 +6,12 @@ import {
   Button
 } from '@chakra-ui/core'
 
-import DashboardContainer from '@/components/Dashboard/DashboardContainer.js'
 import AddSiteModal from './AddSiteModal'
 
 
-const PaidPlanSites = (props) => {
+const PaidPlanEmpty = (props) => {
   return (
     <>
-      <DashboardContainer>
         <Flex
           width="100%"
           backgroundColor="white"
@@ -25,11 +23,9 @@ const PaidPlanSites = (props) => {
         >
           <Heading size="lg" mb={2}>Here are your sites</Heading>
           <Text mb={4}>Welcome 👋 Let's get started.</Text>
-          {/* <Button fontWeight="medium" maxW="200px" bg="gray.900" color="white">Add your first site</Button> */}
-          <AddSiteModal />
+          <AddSiteModal>Add your First Site</AddSiteModal>
         </Flex>
-      </DashboardContainer>
     </>
   )
 }
-export default PaidPlanSites
+export default PaidPlanEmpty
