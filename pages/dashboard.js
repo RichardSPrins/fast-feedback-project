@@ -10,8 +10,9 @@ import SiteTable from '@/components/Dashboard/PaidPlan/SiteTable'
 
 
 const Dashboard = () => {
-  const { data, error } = useSWR('/api/sites', fetcher)
   const auth = useAuth()
+  const { data, error } = useSWR(auth?.user ? ['/api/sites', auth.user.xa || auth.user.token] : null, fetcher)
+  // console.log(auth.user)
 
   if (!data) {
     return (

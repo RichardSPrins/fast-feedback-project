@@ -17,7 +17,8 @@ export async function getStaticProps(ctx) {
 
 export async function getStaticPaths() {
   const { sites } = await getAllSites()
-  const paths = sites.map(site => ({
+  console.log('sites', sites)
+  const paths = sites && sites.map(site => ({
     params: {
       siteId: site.id.toString()
     }
@@ -30,9 +31,9 @@ export async function getStaticPaths() {
 
 const SiteFeedback = ({ initialFeedback }) => {
   const [allFeedback, setAllFeedback] = React.useState(initialFeedback)
+  const inputEl = React.useRef(null);
   const auth = useAuth();
   const router = useRouter();
-  const inputEl = React.useRef(null);
 
   const onFormSubmit = (event) => {
     event.preventDefault()
