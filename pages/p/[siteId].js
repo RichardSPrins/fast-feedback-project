@@ -10,7 +10,8 @@ export async function getStaticProps(ctx) {
   const { feedback } = await getAllFeedback(siteId)
   return {
     props: {
-      initialFeedback: feedback
+      initialFeedback: feedback,
+      unstable_revalidate: 1
     }
   }
 }
