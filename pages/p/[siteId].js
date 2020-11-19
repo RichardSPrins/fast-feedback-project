@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { getAllFeedback, getAllSites } from "@/lib/db-admin"
 import Feedback from '@/components/Dashboard/PaidPlan/Feedback'
 import { Box, FormControl, FormLabel, Input, Button } from '@chakra-ui/core'
