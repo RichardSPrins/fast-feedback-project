@@ -10,14 +10,16 @@ export async function getStaticProps(ctx) {
   const { feedback } = await getAllFeedback(siteId)
   return {
     props: {
-      initialFeedback: feedback
+      initialFeedback: feedback,
+      unstable_revalidate: 1
     }
   }
 }
 
 export async function getStaticPaths() {
   const { sites } = await getAllSites()
-  const paths = sites.map(site => ({
+  console.log('sites', sites)
+  const paths = sites && sites.map(site => ({
     params: {
       siteId: site.id.toString()
     }
@@ -30,9 +32,9 @@ export async function getStaticPaths() {
 
 const SiteFeedback = ({ initialFeedback }) => {
   const [allFeedback, setAllFeedback] = React.useState(initialFeedback)
+  const inputEl = React.useRef(null);
   const auth = useAuth();
   const router = useRouter();
-  const inputEl = React.useRef(null);
 
   const onFormSubmit = (event) => {
     event.preventDefault()

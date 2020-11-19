@@ -41,7 +41,7 @@ const AddSiteModal = ({ children }) => {
           ratings: false
         }
       };
-      
+
       createSite(newSite);
       toast({
         position: 'top-right',
@@ -51,9 +51,9 @@ const AddSiteModal = ({ children }) => {
         duration: 2000,
         isClosable: true
       });
-      mutate('/api/sites',
+      mutate(['/api/sites', auth.user.xa || auth.user.token],
         async (data) => {
-          return {sites: [ newSite,...data.sites]}
+          return { sites: [newSite, ...data.sites] }
         },
         false
       );
