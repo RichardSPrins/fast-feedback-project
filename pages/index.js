@@ -10,7 +10,6 @@ import { useAuth } from '@/lib/auth'
 import FreePlan from '@/components/Dashboard/FreePlan/FreePlan';
 
 export default function Home() {
-  // const { colorMode, toggleColorMode } = useColorMode();
   const auth = useAuth()
   useEffect(() => {
     console.log(auth)
@@ -18,14 +17,14 @@ export default function Home() {
 
   return (
     <>
-      <Box bg="gray.100" py={16}>
+      <Box bg="gray.100" py={16} px={8}>
         <Flex as="main" direction="column" maxW="700px" margin="0 auto">
           <Head>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
               if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
-                window.location.href = "/dashboard"
+                window.location.href = "/sites"
               }
             `
               }}
@@ -49,7 +48,7 @@ export default function Home() {
           {auth.user ? (
             <Button
               as="a"
-              href="/dashboard"
+              href="/sites"
               backgroundColor="gray.900"
               color="white"
               fontWeight="medium"

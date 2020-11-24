@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Skeleton } from '@chakra-ui/core';
+import { Box, Skeleton, Link } from '@chakra-ui/core';
 import { Table, Tr, Th, Td } from './Table';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { format, parseISO } from 'date-fns';
 
 const SiteTable = ({ sites }) => {
@@ -14,7 +14,7 @@ const SiteTable = ({ sites }) => {
           <Th>Site Link</Th>
           <Th>Feedback Link</Th>
           <Th>Date Added</Th>
-          <Th>{''}</Th>
+          {/* <Th>{''}</Th> */}
         </Tr>
       </thead>
       <tbody>
@@ -28,11 +28,14 @@ const SiteTable = ({ sites }) => {
                 <p>{site.url}</p>
               </Td>
               <Td>
-                <Link as={`p/${site.id}`} href={`p/[siteId]`} passHref><a>View Feedback</a></Link>
+                <NextLink as={`p/${site.id}`} href={`p/[siteId]`} passHref><Link fontWeight="medium" color="blue.500">View Feedback</Link></NextLink>
               </Td>
               <Td>
                 <p>{format(parseISO(site.createdAt), 'PPpp')}</p>
               </Td>
+              {/* <Td>
+                {'Remove'}
+              </Td> */}
             </Box>
           )
         })}
