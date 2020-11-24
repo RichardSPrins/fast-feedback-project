@@ -6,15 +6,12 @@ import {
   Link,
   Button,
   Stack,
-  Avatar,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Heading
+  Avatar
 } from '@chakra-ui/core'
 
+import NextLink from 'next/link'
+
 import { useAuth } from '@/lib/auth'
-import AddSiteModal from './PaidPlan/AddSiteModal'
 
 const DashboardContainer = ({ children }) => {
   const router = useRouter()
@@ -24,6 +21,7 @@ const DashboardContainer = ({ children }) => {
     auth.signout()
     router.push('/')
   }
+
 
   useEffect(() => {
     console.log(auth?.user)
@@ -38,8 +36,8 @@ const DashboardContainer = ({ children }) => {
       >
         <Stack isInline spacing={4} alignItems="center">
           <Icon name="logo" color="black" size="24px" />
-          <Link>Feedback</Link>
-          <Link>Sites</Link>
+          <NextLink href="/feedback" passHref><Link style={{ marginRight: '1rem' }}>Feedback</Link></NextLink>
+          <NextLink href="/sites" passHref><Link style={{ marginRight: '1rem' }}>Sites</Link></NextLink>
         </Stack>
         <Flex alignItems="center">
           {auth?.user && <Button variant="ghost" onClick={handleLogout} mr={4}>Log Out</Button>}
@@ -51,7 +49,8 @@ const DashboardContainer = ({ children }) => {
         backgroundColor="blackAlpha.50"
         justifyContent="flex-start"
         p={8}
-        height="100vh"
+        height="100%"
+        minHeight="100vh"
       >
         <Flex
           direction="column"
@@ -60,15 +59,6 @@ const DashboardContainer = ({ children }) => {
           maxWidth="800px"
           width="100%"
         >
-          <Breadcrumb>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink color="gray.700" fontSize="sm">Sites</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <Flex justifyContent="space-between">
-            <Heading mb={4}>My Sites</Heading>
-            <AddSiteModal>+ Add a Site</AddSiteModal>
-          </Flex>
           {children}
         </Flex>
       </Flex>

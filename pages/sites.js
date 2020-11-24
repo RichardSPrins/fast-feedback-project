@@ -7,33 +7,28 @@ import SiteTableSkeleton from '@/components/Dashboard/PaidPlan/SiteTableSkeleton
 import DashboardContainer from '@/components/Dashboard/DashboardContainer.js'
 import fetcher from '@/utils/fetcher'
 import SiteTable from '@/components/Dashboard/PaidPlan/SiteTable'
+import SiteTableHeader from '@/components/Dashboard/PaidPlan/SiteTableHeader'
 
 
-const Dashboard = () => {
+const Sites = () => {
   const auth = useAuth()
   const { data, error } = useSWR(auth?.user ? ['/api/sites', auth.user.xa || auth.user.token] : null, fetcher)
-  // console.log(auth.user)
 
   if (!data) {
     return (
       <DashboardContainer>
+        <SiteTableHeader />
         <SiteTableSkeleton />
       </DashboardContainer>
     )
   }
 
-  // if (!auth.user) {
-  //   return (
-  //     <DashboardContainer>
-  //       <SiteTableSkeleton />
-  //     </DashboardContainer>
-  //   )
-  // }
   return (
     <DashboardContainer>
+      <SiteTableHeader />
       {data.sites.length > 0 ? <SiteTable sites={data.sites} /> : <PaidPlanEmpty />}
     </DashboardContainer>
   )
 }
 
-export default Dashboard
+export default Sites

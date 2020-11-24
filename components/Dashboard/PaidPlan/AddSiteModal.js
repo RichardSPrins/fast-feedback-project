@@ -18,10 +18,10 @@ import {
 
 import { createSite } from '@/lib/firestoreDb';
 import { useAuth } from '@/lib/auth';
-import fetcher from 'utils/fetcher';
+// import fetcher from 'utils/fetcher';
 
 const AddSiteModal = ({ children }) => {
-  const { data, error } = useSWR('/api/sites', fetcher)
+  // const { data, error } = useSWR('/api/sites', fetcher)
 
   const toast = useToast();
   const auth = useAuth();
